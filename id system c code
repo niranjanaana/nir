@@ -1,0 +1,123 @@
+#include <stdio.h>
+#include <string.h>
+
+struct Student {
+    int rollNo;
+    char name[50];
+    float marks[5];
+    float cgpa;
+};
+
+struct Teacher {
+    int id;
+    char name[50];
+    char subject[30];
+};
+
+struct Staff {
+    int id;
+    char name[50];
+    char position[30];
+};
+
+void menu() {
+    printf("\n===== COLLEGE INFO SYSTEM =====\n");
+    printf("1. Add Student\n");
+    printf("2. Add Teacher\n");
+    printf("3. Add Staff\n");
+    printf("4. Display Students\n");
+    printf("5. Display Teachers\n");
+    printf("6. Display Staff\n");
+    printf("0. Exit\n");
+}
+
+int main() {
+    struct Student students[100];
+    struct Teacher teachers[50];
+    struct Staff staff[50];
+    int studentCount = 0, teacherCount = 0, staffCount = 0;
+    int choice, i, j;
+
+    do {
+        menu();
+        printf("Enter choice: ");
+        scanf("%d", &choice);
+
+        switch(choice) {
+            case 1:
+                printf("Enter Roll No: ");
+                scanf("%d", &students[studentCount].rollNo);
+                printf("Enter Name: ");
+                scanf(" %[^\n]", students[studentCount].name);
+                float total = 0;
+                for(j = 0; j < 5; j++) {
+                    printf("Enter marks for subject %d: ", j + 1);
+                    scanf("%f", &students[studentCount].marks[j]);
+                    total += students[studentCount].marks[j];
+                }
+                students[studentCount].cgpa = total / 50.0; // Assuming each subject out of 10
+                studentCount++;
+                break;
+
+            case 2:
+                printf("Enter Teacher ID: ");
+                scanf("%d", &teachers[teacherCount].id);
+                printf("Enter Name: ");
+                scanf(" %[^\n]", teachers[teacherCount].name);
+                printf("Enter Subject: ");
+                scanf(" %[^\n]", teachers[teacherCount].subject);
+                teacherCount++;
+                break;
+
+            case 3:
+                printf("Enter Staff ID: ");
+                scanf("%d", &staff[staffCount].id);
+                printf("Enter Name: ");
+                scanf(" %[^\n]", staff[staffCount].name);
+                printf("Enter Position: ");
+                scanf(" %[^\n]", staff[staffCount].position);
+                staffCount++;
+                break;
+
+            case 4:
+                printf("\n--- Students ---\n");
+                for(i = 0; i < studentCount; i++) {
+                    printf("Roll No: %d\n", students[i].rollNo);
+                    printf("Name: %s\n", students[i].name);
+                    printf("CGPA: %.2f\n", students[i].cgpa);
+                    printf("----------------\n");
+                }
+                break;
+
+            case 5:
+                printf("\n--- Teachers ---\n");
+                for(i = 0; i < teacherCount; i++) {
+                    printf("ID: %d\n", teachers[i].id);
+                    printf("Name: %s\n", teachers[i].name);
+                    printf("Subject: %s\n", teachers[i].subject);
+                    printf("----------------\n");
+                }
+                break;
+
+            case 6:
+                printf("\n--- Staff ---\n");
+                for(i = 0; i < staffCount; i++) {
+                    printf("ID: %d\n", staff[i].id);
+                    printf("Name: %s\n", staff[i].name);
+                    printf("Position: %s\n", staff[i].position);
+                    printf("----------------\n");
+                }
+                break;
+
+            case 0:
+                printf("Exiting program...\n");
+                break;
+
+            default:
+                printf("Invalid choice!\n");
+        }
+
+    } while(choice != 0);
+
+    return 0;
+}
