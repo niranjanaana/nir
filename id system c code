@@ -55,7 +55,7 @@ int main() {
                     scanf("%f", &students[studentCount].marks[j]);
                     total += students[studentCount].marks[j];
                 }
-                students[studentCount].cgpa = total / 50.0; // Assuming each subject out of 10
+                students[studentCount].cgpa = total / 50.0;
                 studentCount++;
                 break;
 
